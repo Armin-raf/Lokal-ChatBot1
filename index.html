@@ -1180,4 +1180,146 @@
       <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M289.94 256l95-95A24 24 0 00351 127l-95 95-95-95a24 24 0 00-34 34l95 95-95 95a24 24 0 1034 34l95-95 95 95a24 24 0 0034-34z"></path>
       </svg>
-    </button><h2 id="meetergo-modal-title" style="position: absolute; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;">Meetergo Booking</h2><p id="meetergo-modal-description" style="position: absolute; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;">Calendar booking interface</p></div></body></html>
+    </button><h2 id="meetergo-modal-title" style="position: absolute; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;">Meetergo Booking</h2><p id="meetergo-modal-description" style="position: absolute; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0px, 0px, 0px, 0px); white-space: nowrap; border-width: 0px;">Calendar booking interface</p></div><!-- BLUE PROCESS: Chatbot + AI Voice Agent Widgets -->
+<style>
+.bp-widgets {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 9999;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+.bp-widget {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 15px 45px rgba(0,0,0,0.35);
+  transition: all 0.2s ease;
+}
+
+.bp-widget:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+.bp-widget-chat {
+  background: linear-gradient(135deg,#3b82f6,#2563eb);
+}
+
+.bp-widget-voice {
+  background: linear-gradient(135deg,#111827,#374151);
+}
+
+.bp-widget svg {
+  width: 28px;
+  height: 28px;
+  fill: white;
+}
+
+.bp-tooltip {
+  position: absolute;
+  right: 75px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.bp-widget:hover .bp-tooltip {
+  opacity: 1;
+}
+
+/* Chat popup */
+#bp-chat-popup {
+  position: fixed;
+  right: 20px;
+  bottom: 95px;
+  width: 400px;
+  height: 600px;
+  background: #0b0f1a;
+  border-radius: 16px;
+  display: none;
+  overflow: hidden;
+  box-shadow: 0 25px 80px rgba(0,0,0,0.6);
+  z-index: 9999;
+}
+
+#bp-chat-popup iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+</style>
+
+<div class="bp-widgets">
+
+  <!-- Chatbot Widget -->
+  <button class="bp-widget bp-widget-chat" id="bpChatBtn">
+    <span class="bp-tooltip">Unser Chatbot hilft Ihnen sofort weiter.</span>
+
+    <!-- Speech Bubble Icon -->
+    <svg viewBox="0 0 24 24">
+      <path d="M20 2H4C2.9 2 2 2.9 2 4v12c0 1.1.9 2 2 2h3v4l5-4h8c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+    </svg>
+  </button>
+
+  <!-- Voice Agent Widget -->
+  <button class="bp-widget bp-widget-voice" id="bpVoiceBtn">
+    <span class="bp-tooltip">Rufen Sie unseren KI-Assistenten an – schnell & unkompliziert.</span>
+
+    <!-- Telephone Icon -->
+    <svg viewBox="0 0 24 24">
+      <path d="M6.6 10.8c1.4 2.7 3.9 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3
+      1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C11.3 21 3 12.7 3 2
+      c0-.6.4-1 1-1h3.3c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1l-2
+      1.9z"/>
+    </svg>
+  </button>
+
+</div>
+
+<!-- Chat Popup -->
+<div id="bp-chat-popup">
+  <iframe
+    src="https://hypobranchial-inez-nonmonogamous.ngrok-free.dev/webhook/f406671e-c954-4691-b39a-66c90aa2f103/chat">
+  </iframe>
+</div>
+
+<script>
+
+// Chatbot toggle popup
+const chatBtn = document.getElementById("bpChatBtn");
+const chatPopup = document.getElementById("bp-chat-popup");
+
+chatBtn.onclick = () => {
+  chatPopup.style.display =
+    chatPopup.style.display === "block" ? "none" : "block";
+};
+
+// Voice Agent open webhook
+document.getElementById("bpVoiceBtn").onclick = () => {
+
+  window.open(
+    "https://hypobranchial-inez-nonmonogamous.ngrok-free.dev/webhook-test/c6e462b3-86c6-4812-a58c-bfd8fe4ef882",
+    "_blank"
+  );
+
+};
+
+</script>
+
+<!-- END widgets --></body></html>
